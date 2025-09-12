@@ -1,0 +1,47 @@
+.swiper-container {
+  position: relative;
+  /* overflow: hidden; */
+  /* padding: 2rem 0; */
+}
+
+.swiper-container::before {
+  content: url("../../../public/Home/vision/caraousal/white.png");
+  position: absolute;
+  object-fit: cover;
+  /* background-color: red; */
+  top: 0;
+  left: 0%;
+  /* width: auto; */
+  height: 100%;
+  /* background-image: url('../../../public/Home/vision/caraousal/white.png'); */
+  /* background-size: no-repeat;
+    background-position: center; */
+  z-index: 2;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #1A8482;
+  color: transparent;
+}
+
+.swiper-scrollbar {
+  background-color: #1a8482 !important;
+  width: 50% !important;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover::after {
+  content: "Hover Content";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
+  border: 1px solid black;
+  padding: 8px;
+  z-index: 10;
+  max-width: 200px;
+  word-wrap: break-word;
+}

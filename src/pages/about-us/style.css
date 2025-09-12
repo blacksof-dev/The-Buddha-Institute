@@ -1,0 +1,51 @@
+.box-bottom::before {
+    content: url('../../../public/aboutUs/programs/flower.png');
+    position: absolute;
+    bottom: -15px;;
+    right: 0;
+    mix-blend-mode: luminosity;
+}
+
+.fade-enter {
+    opacity: 0;
+    transform: scale(0.95);
+}
+.fade-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+.fade-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 300ms, transform 300ms;
+}
+
+/* Handle the open/close transition for the content */
+.grid {
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .max-h-0 {
+    max-height: 0;
+  }
+  
+  /* .max-h-[1000px] {
+    max-height: 1000px;
+  } */
+  
+  .opacity-0 {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .opacity-100 {
+    opacity: 1;
+    visibility: visible;
+  }
+  

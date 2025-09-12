@@ -1,0 +1,12 @@
+select option {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+select option:focus {
+  background-color: #d9d9d9;
+}
+
+.option-value {
+  background: #1a8482;
+}

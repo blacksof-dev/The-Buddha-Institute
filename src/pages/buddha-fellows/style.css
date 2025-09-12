@@ -1,0 +1,28 @@
+.swiper-container {
+  position: relative;
+  overflow: hidden;
+  /* padding: 2rem 0; */
+}
+
+.swiper-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 50%;
+  height: 100%;
+  background-image: url("../../../public/Home/vision/caraousal/white-fade.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #1A8482; /* Adjust stroke width and color */
+  color: transparent; /* Makes the fill transparent to show only the border */
+}
+
+.swiper-scrollbar {
+  background-color: #1a8482 !important;
+  width: 50% !important;
+}
