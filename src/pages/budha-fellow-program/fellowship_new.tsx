@@ -10,7 +10,7 @@ type testimonialContent = {
   title:string;
   desc:string;
 }
-const VoiceSubComp = () => {
+const VoiceSubComp = React.memo(() => {
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
   const [apidata,setapidata] = useState<testimonialContent []>([]);
@@ -143,7 +143,7 @@ const VoiceSubComp = () => {
       </section>
     </>
   );
-};
+});
 
 export default VoiceSubComp;
 

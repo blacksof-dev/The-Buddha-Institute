@@ -1,6 +1,6 @@
 import React from "react";
 
-const Sector = () => {
+const Sector = React.memo(() => {
   return (
     <section className="blade-top-margin-lg blade-bottom-padding-lg  px-4 sm:px-10 lg:px-0  ">
       <div className="gsap-fade-in">
@@ -29,6 +29,6 @@ const Sector = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Sector;

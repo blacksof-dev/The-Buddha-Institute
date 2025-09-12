@@ -1,10 +1,9 @@
 import React from "react";
 import threePronged from "../../assets/BFP/Three-pronged.png";
 import { Link } from "react-router-dom";
-const ThreeFold = () => {
+const ThreeFold = React.memo(() => {
   return (
-    // <>
-    //   <section className="blade-top-padding-lg blade-bottom-padding-lg bg-[#FFFBEF]">
+   
     <> 
       
       <section className="blade-top-padding-lg blade-bottom-padding-lg  bg-[#FFFBEF]">
@@ -40,6 +39,6 @@ const ThreeFold = () => {
       </section>
     </>
   );
-};
+});
 
 export default ThreeFold;

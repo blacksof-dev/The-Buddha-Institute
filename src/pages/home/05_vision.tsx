@@ -1,10 +1,11 @@
 
 
+import React from "react";
 import VisionSwiper from "./vision_swiper";
 
 
 
-const Vision = () => {
+const Vision = React.memo(() => {
   const data = [
     {
       logo: "/Home/vision/logo-1.png",
@@ -114,6 +115,6 @@ const Vision = () => {
       </section>
     </section>
   );
-};
+});
 
 export default Vision;

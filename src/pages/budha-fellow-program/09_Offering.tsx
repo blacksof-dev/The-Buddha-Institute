@@ -3,7 +3,7 @@ import React from "react";
 import mobileOfferings from "../../assets/BFP/mobileOfferings.png"
 import offerings from "../../assets/BFP/offering.png"
 
-const Offering = () => {
+const Offering = React.memo(() => {
   return (
     <>
       <section className="  px-4 sm:px-10 lg:px-0 ">
@@ -49,7 +49,7 @@ const Offering = () => {
       </section>
     </>
   );
-};
+});
 
 export default Offering;
 

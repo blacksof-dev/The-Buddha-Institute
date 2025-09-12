@@ -8,7 +8,7 @@ import equalIcon from "../../assets/home/equal.svg";
 import sharedPurpose from "../../assets/home/sharedPurpose.svg";
 import ApplicationProcess from "molecules/applicationPopup";
 
-const BuddhaFellowship = () => {
+const BuddhaFellowship = React.memo(() => {
   const [showPopup, setshowPopup] = useState(false);
 
   return (
@@ -112,6 +112,6 @@ const BuddhaFellowship = () => {
       </div>
     </section>
   );
-};
+});
 
 export default BuddhaFellowship;

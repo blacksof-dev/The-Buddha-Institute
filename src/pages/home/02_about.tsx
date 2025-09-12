@@ -1,6 +1,6 @@
 import React, {  useEffect, useState } from "react";
 import nurtureVideo from "../../assets/home/about/nurturing-updated.mp4";
-const Nurturing = () => {
+const Nurturing = React.memo(() => {
   const [isModelOpen, setisModelOpen] = useState(false);
   const openModel = () => {
     setisModelOpen(true);
@@ -101,6 +101,6 @@ const closeModel = () => {
       </section>
     </div>
   );
-};
+});
 
 export default Nurturing;

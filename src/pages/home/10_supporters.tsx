@@ -10,8 +10,7 @@ type PartnerAndSupport = {
   title?: string;
   __v: number;
 };
-
-export default function Supporters() {
+const Supporters = React.memo(() => {
   type SectionType = "section1" | "section2" | "section3";
   const [activeSection, setActiveSection] = useState<SectionType>("section1");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -256,4 +255,6 @@ export default function Supporters() {
       </section>
     </>
   );
-}
+});
+
+export default Supporters;

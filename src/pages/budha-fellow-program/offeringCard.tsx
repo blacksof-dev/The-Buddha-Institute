@@ -7,7 +7,7 @@ type OfferingProps = {
   image?: string;
 };
 
-export const OfferingCard = ({
+export const OfferingCard = React.memo(({
   desc,
   revenue,
   category,
@@ -35,4 +35,4 @@ export const OfferingCard = ({
       )}
     </div>
   );
-};
+});

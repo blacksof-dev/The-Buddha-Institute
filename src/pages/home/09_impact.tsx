@@ -10,7 +10,7 @@ type MapDetails = {
   digit: string;
   description: string;
 };
-const Impact = () => {
+const Impact = React.memo(() => {
   const [activetooltip, setactivetooltip] = useState(null);
   const [mapapidata, setmapapidata] = useState<MapDetails[]>();
 
@@ -716,6 +716,6 @@ const Impact = () => {
       </section>
     </>
   );
-};
+});
 
 export default Impact;

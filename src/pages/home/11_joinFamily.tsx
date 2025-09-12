@@ -5,7 +5,7 @@ import mobileView from "assets/home/joinFamily/mobileView.jpg";
 import arrow from "assets/home/joinFamily/arrow.svg";
 import ApplicationProcess from "molecules/applicationPopup";
 
-const JoinFamily = () => {
+const JoinFamily = React.memo(() => {
   const data = [
     {
       title: "Donate",
@@ -90,6 +90,6 @@ const JoinFamily = () => {
       </section>
     </section>
   );
-};
+});
 
 export default JoinFamily;

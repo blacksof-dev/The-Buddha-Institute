@@ -12,7 +12,7 @@ type CardData={
   fulldesc?:string;
 };
 
-const Mentors = () => {
+const Mentors = React.memo(() => {
   
 
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -168,6 +168,6 @@ const Mentors = () => {
       )}
     </>
   );
-};
+});
 
 export default Mentors;

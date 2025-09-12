@@ -15,7 +15,7 @@ type Brochures = {
     description?:string
 }
 
-const Resources = () => {
+const Resources = React.memo(() => {
   const [activeCategory, setActiveCategory] =
     useState<Category>("Buddha Times");
   const [fade, setFade] = useState(true);
@@ -92,6 +92,6 @@ const Resources = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Resources;

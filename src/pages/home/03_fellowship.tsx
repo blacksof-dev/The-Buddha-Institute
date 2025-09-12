@@ -1,6 +1,6 @@
 import React from "react";
 
-const Fellowship = () => {
+const Fellowship = React.memo(() => {
   const data = [
     {
       icon: "/Home/arrow.png",
@@ -94,6 +94,6 @@ const Fellowship = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Fellowship;

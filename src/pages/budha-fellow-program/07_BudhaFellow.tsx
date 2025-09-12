@@ -4,7 +4,7 @@ import Button from "atoms/button";
 import React, { useState } from "react";
 import { IoMdReturnRight } from "react-icons/io";
 import { Link } from "react-router-dom";
-const BudhaFellow = () => {
+const BudhaFellow = React.memo(() => {
   const stageImages: Record<
     | "Outreach"
     | "Virtual Interview"
@@ -125,7 +125,7 @@ const BudhaFellow = () => {
       </section>
     </>
   );
-};
+});
 
 const fellowshipdata = {
   productArray: [

@@ -7,6 +7,7 @@ import anupam from "../../assets/BFP/anupam-pandey.jpg";
 import Srinivas from "../../assets/BFP/srinivas-rao.jpg";
 import {  useEffect, useState } from "react";
 import axios from "axios";
+import React from "react";
 
 type CardData={
   cover: string;
@@ -18,7 +19,7 @@ type CardData={
   fulldesc?:string;
 };
 
-const Anchors = () => {
+const Anchors = React.memo(() => {
 
   const [apidata, setapidata] = useState<CardData[]>([]);
 
@@ -96,7 +97,7 @@ const Anchors = () => {
       </section>
     </>
   );
-};
+});
 
 
 export default Anchors;

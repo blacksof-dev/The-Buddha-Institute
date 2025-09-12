@@ -3,7 +3,7 @@ import Faq from "../donate-us/06_faq";
 import { faq_application } from "statics/BFP_Faq_Application";
 import { faq_program } from "statics/BFP_program_Faq";
 
-const FrequentlyAsked = () => {
+const FrequentlyAsked = React.memo(() => {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
 
   const handleApplication = () => {
@@ -54,6 +54,6 @@ const FrequentlyAsked = () => {
       </section>
     </>
   );
-};
+});
 
 export default FrequentlyAsked;

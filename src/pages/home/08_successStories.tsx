@@ -1,7 +1,7 @@
 
 import React, {  useState } from "react";
 import successImage from "assets/home/successStories/success.jpeg";
-const SuccessStories = () => {
+const SuccessStories = React.memo(() => {
   const [isModelOpen, setisModelOpen] = useState(false);
   const openModel = () => {
     setisModelOpen(true);
@@ -97,6 +97,6 @@ const SuccessStories = () => {
       </section>
     </div>
   );
-};
+});
 
 export default SuccessStories;

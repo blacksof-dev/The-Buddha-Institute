@@ -20,7 +20,7 @@ type props = {
   buttonLinkTwo?: any;
   category?: string;
 };
-const Banner = ({
+const Banner = React.memo(({
   backgroundClass = "bg-teal",
   bannerImage,
   videoSrc,
@@ -123,6 +123,6 @@ const Banner = ({
       </div>
     </section>
   );
-};
+});
 
 export default Banner;

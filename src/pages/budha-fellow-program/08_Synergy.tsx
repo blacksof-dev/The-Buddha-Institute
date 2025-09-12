@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { data } from "statics/BFP_Faq_Application";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css/autoplay";
-const Synergy = () => {
+const Synergy = React.memo(() => {
   return (
     <>
       <section className="blade-top-padding-lg blade-bottom-padding-lg  bg-[#FAF9F5]">
@@ -171,6 +171,6 @@ const Synergy = () => {
       </section>
     </>
   );
-};
+});
 
 export default Synergy;

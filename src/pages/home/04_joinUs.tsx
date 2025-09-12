@@ -8,7 +8,7 @@ import logo4 from "assets/home/JoinUs/logo4.svg";
 import { useNavigate } from "react-router-dom";
 import ApplicationProcess from "molecules/applicationPopup";
 
-const JoinUs = () => {
+const JoinUs = React.memo(() => {
   const [showPopup, setshowPopup] = useState(false);
 
   const data = [
@@ -63,6 +63,6 @@ const JoinUs = () => {
       </div>
     </section>
   );
-};
+});
 
 export default JoinUs;

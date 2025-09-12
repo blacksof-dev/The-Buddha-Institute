@@ -1,10 +1,11 @@
 
 import vedAryaThumbnail from "assets/home/vedAryaThumbnail.jpg"
+import React from "react";
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-const Founder = () => {
+const Founder = React.memo(() => {
   const [isModelOpen, setisModelOpen] = useState(false);
 
   const openModel = () => {
@@ -155,6 +156,6 @@ const Founder = () => {
       </section>
     </>
   );
-};
+});
 
 export default Founder;

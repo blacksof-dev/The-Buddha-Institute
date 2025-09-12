@@ -19,7 +19,7 @@ type props = {
   buttonLinkTwo?: any;
   category?: string;
 };
-const Banner = ({
+const Banner = React.memo(({
   backgroundClass = "bg-teal",
   bannerImage,
   videoSrc,
@@ -55,7 +55,7 @@ const Banner = ({
             muted
             loop
             playsInline
-            preload="auto"
+              preload="metadata"   
             className=" h-[300px] sm:h-full w-full object-cover"
           >
             <source src={videoSrc} type="video/mp4" />
@@ -181,6 +181,6 @@ const Banner = ({
       </div>
     </section>
   );
-};
+});
 
 export default Banner;

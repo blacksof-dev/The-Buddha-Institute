@@ -11,7 +11,7 @@ type testimonialVideo = {
   type:string;
 };
 
-const FellowShip = () => {
+const FellowShip = React.memo(() => {
  
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isFirstSlide, setIsFirstSlide] = useState(true);
@@ -254,7 +254,7 @@ const FellowShip = () => {
       </section>
     </>
   );
-};
+});
 
 
 
