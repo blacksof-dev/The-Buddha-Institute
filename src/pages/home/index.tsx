@@ -11,7 +11,7 @@ import Impact from "./09_impact";
 import JoinFamily from "./11_joinFamily";
 
 
-import homeogImage from "../../assets/OG/homeOgImage.png";
+import homeogImage from "../../../public/final-logo-new.svg";
 import kalyani from "assets/home/caseStudies/kalyani.jpg";
 import sahrudaya from "assets/home/caseStudies/sahrudaya.png";
 import suhas from "assets/home/caseStudies/suhas.jpg";
@@ -53,8 +53,8 @@ const Home = () => {
           content="A platform supporting development entrepreneurs in creating social impact for marginalized communities."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={homeogImage} />
-        <meta property="og:image" content={homeogImage} />
+        <meta property="og:url" content="./final-logo-new.svg" />
+        <meta property="og:image" content="./final-logo-new.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -68,7 +68,7 @@ const Home = () => {
         />
         <meta
           name="twitter:image"
-          content="https://thebuddhainstitute.org/ogImage.png"
+         content="./final-logo-new.svg"
         />
          <link rel="canonical" href="https://thebuddhainstitute.org/" />
 

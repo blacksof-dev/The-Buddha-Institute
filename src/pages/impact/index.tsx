@@ -5,7 +5,7 @@ import Mapping from "./02_Mapping";
 import Catalysing from "./03_catalysing";
 
 import { Helmet } from "react-helmet-async";
-import homeogImage from "../../assets/OG/homeOgImage.png";
+import homeogImage from "../../../public/final-logo-new.svg";
 import OurImpact from "./04_ourImpact";
 import Voices from "./05_voices";
 
@@ -28,8 +28,8 @@ const Impact = () => {
         <meta name="author" content="The Buddha Institute" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={homeogImage} />
-        <meta property="og:image" content={homeogImage} />
+        <meta property="og:url" content="./final-logo-new.svg" />
+        <meta property="og:image" content="./final-logo-new.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -40,7 +40,7 @@ const Impact = () => {
         />
         <meta
           name="twitter:image"
-          content="https://thebuddhainstitute.org/ogImage.png"
+          content="./final-logo-new.svg"
         />
         <link rel="canonical" href="https://thebuddhainstitute.org/impact" />
 

@@ -8,7 +8,7 @@ import useGSAP from "hooks/useGsap";
 import MouGovernment from "./05_mou-government";
 import { Helmet } from "react-helmet-async";
 
-import homeogImage from "../../assets/OG/homeOgImage.png";
+import homeogImage from "../../../public/final-logo-new.svg";
 
 
 export default function PartnersAndSupporters() {
@@ -25,8 +25,8 @@ export default function PartnersAndSupporters() {
         <meta name="author" content="The Buddha Institute" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={homeogImage} />
-        <meta property="og:image" content={homeogImage} />
+        <meta property="og:url" content="./final-logo-new.svg" />
+        <meta property="og:image" content="./final-logo-new.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -40,7 +40,7 @@ export default function PartnersAndSupporters() {
         />
         <meta
           name="twitter:image"
-          content="https://thebuddhainstitute.org/ogImage.png"
+          content="./final-logo-new.svg"
         />
 
       <link rel="canonical" href="https://thebuddhainstitute.org/partners-and-supporters" />

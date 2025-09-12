@@ -18,8 +18,8 @@ export default function DonationFromUSA() {
             <meta name="author" content="The Buddha Institute" />
     
             <meta property="og:type" content="website" />
-            <meta property="og:url" content={homeogImage} />
-            <meta property="og:image" content={homeogImage} />
+            <meta property="og:url" content="./final-logo-new.svg" />
+            <meta property="og:image" content="./final-logo-new.svg" />
     
             {/* Twitter Card */}
             <meta name="twitter:card" content="summary_large_image" />

@@ -9,7 +9,7 @@ import BeamingConfidence from "./08_beaming-confidence";
 
 import useGSAP from "hooks/useGsap";
 import { Helmet } from "react-helmet-async";
-import homeogImage from "../../assets/OG/homeOgImage.png";
+import homeogImage from "../../../public/final-logo-new.svg";
 import Nurturing from "./02_nurturing";
 import Sustained from "./03_sustained";
 import Resilience from "./04_resilience";
@@ -34,8 +34,8 @@ export default function BuddhaFellows() {
         <meta name="author" content="The Buddha Institute" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={homeogImage} />
-        <meta property="og:image" content={homeogImage} />
+        <meta property="og:url" content="./final-logo-new.svg" />
+        <meta property="og:image" content="./final-logo-new.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -46,7 +46,7 @@ export default function BuddhaFellows() {
         />
         <meta
           name="twitter:image"
-          content="https://thebuddhainstitute.org/ogImage.png"
+          content="./final-logo-new.svg"
         />
  <link rel="canonical" href="https://thebuddhainstitute.org/buddha-fellows" />
         <meta charSet="UTF-8" />

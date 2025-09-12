@@ -5,7 +5,7 @@ import Moments from './02_moments'
 import Tracking from './08_tracking'
 
 import { Helmet } from "react-helmet-async";
-import homeogImage from "../../assets/OG/homeOgImage.png";
+import homeogImage from "../../../public/final-logo-new.svg";
 import NewsMedia from './03_newsMedia';
 import Brouches from './05_broches';
 import Newsletter from './04_newsletter';
@@ -29,8 +29,8 @@ const Resources = () => {
         <meta name="author" content="The Buddha Institute" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={homeogImage} />
-        <meta property="og:image" content={homeogImage} />
+        <meta property="og:url" content="./final-logo-new.svg" />
+        <meta property="og:image" content="./final-logo-new.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -41,7 +41,7 @@ const Resources = () => {
         />
         <meta
           name="twitter:image"
-          content="https://thebuddhainstitute.org/ogImage.png"
+         content="./final-logo-new.svg"
         />
   <link rel="canonical" href="https://thebuddhainstitute.org/resources" />
 

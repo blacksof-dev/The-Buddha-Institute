@@ -26,12 +26,7 @@ const About = () => {
             </div>
         </div>
 
-        {/* <div className='blade-top-margin-sm blade-bottom-margin-sm relative lg:hidden block '>
-            <img src={buddha_Fellow_Cohort} alt="" />  
-            <div className="absolute bottom-0 sm:bottom-2 left-3 sm:left-14 right-8 text-center ">
-              <h6 className="text-white font-lato-regular">Buddha Fellows Cohort of 2023-25 along with The Buddha Institute team</h6>
-            </div>
-        </div> */}
+    
         <div className='font-lato-regular'>
             <h4>The Buddha Institute (BI) is hosted under Education for Employability Foundation (E2F), and registered as a public charitable trust. The Buddha Institute supports grassroots for-profit businesses focused on social transformation to become profitable, sustainable, and ever-growing. Our range of certifications and registrations essential for our operations, including 12A and 80G certifications, which confer tax-exempt status to donations under Indian law.</h4> <br/>
             <h4>Additionally, we hold Foreign Contribution Regulation Act (FCRA) registration, allowing us to receive international donations. Our entity is also registered under the Corporate Social Responsibility (CSR) Act and the Darpan portal of Niti Aayog, ensuring transparency and compliance with Indian government regulations.</h4>
