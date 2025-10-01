@@ -28,7 +28,7 @@ const HeadingImage: React.FC<HeadinngImageProps> = ({
         <hr className={`border-${hrColor} mb-4`} />
         <div className="blade-top-margin-sm">
           <img
-            src={imageSrc}
+            src={`http://localhost:3000/${imageSrc.replace(/\\/g, '/')}`}
             alt={imageAlt}
             className="h-full w-full object-cover"
             

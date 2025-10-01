@@ -29,6 +29,7 @@ import Resources from "./12_resources";
 
 
 
+
 const Home = () => {
   useGSAP(".home-wrapper");
   return (
@@ -101,6 +102,7 @@ const Home = () => {
 
         <JoinFamily />
         <Supporters />
+       
 
       </div>
     </>

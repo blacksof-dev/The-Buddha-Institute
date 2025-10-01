@@ -48,10 +48,10 @@ export default function SignIn() {
 
   return (
     <div
-      className={`fixed bg-black/40 backdrop-blur-lg inset-0 z-50 flex flex-col items-center 2xl:blade-top-padding`}
+      className={`fixed bg-black/20 backdrop-blur-lg inset-0 z-50 flex flex-col items-center 2xl:blade-top-padding`}
     >
-      <div className="mb-5 flex justify-center">
-        <img className="w-[35%] " src={`/final-logo.svg`} alt="logo"></img>
+      <div className="mb-5 flex justify-center ">
+      <img className="w-[35%] h-fit cursor-pointer" src={`/final-logo.svg`} alt="logo"></img>
       </div>
       <div className="border-[1px] border-gray-400 bg-white rounded-lg shadow-lg w-[25rem]">
         <form className="flex flex-col p-6" onSubmit={handleSubmit(onSubmit)}>

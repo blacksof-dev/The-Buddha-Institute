@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import News from './News'
-// import style from "../News/NewMainContainer.module.css";
-// import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import axios from 'axios';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import FormPopUp from 'admin/formPopUp';
