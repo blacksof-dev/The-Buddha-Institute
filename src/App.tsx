@@ -47,6 +47,9 @@ import NewsLetterPage from "admin/pages/newsletter";
 import AboutUsAdmin from "admin/pages/aboutUs";
 import CreatePassword from "admin/pages/authentication/set-password";
 import Privacy from "organisms/privacy";
+import Register from "auth/register";
+import Login from "auth/login";
+import ForgotPassword from "auth/forgot-password";
 
 const PrivateRoute = () => {
   const { token } = useAuth();
@@ -92,7 +95,7 @@ function App() {
               <Route path="/donate-us" element={<DonateUs />} />
               {/* <Route path="/ecowrap-caseStudy" element={<MarkDownPractise />} /> */}
               <Route path="signin" element={<AdminSignIn />}></Route>
-              <Route path="forgot-password" element={<ForgetPassword />} />
+              <Route path="/forgot-admin-password" element={<ForgetPassword />} />
               <Route path="create-password/:token" element={<CreatePassword />} />
               <Route
                 path="/budha-fellowship-program"
@@ -114,6 +117,11 @@ function App() {
               <Route path="/donate-usa" element={<DonationFromUSA />} />
               <Route path="/donate-india" element={<DonationFromIndia />} />
               <Route path="/case-study" element={<MarkDown />} />
+
+               <Route path="/registration" element={<Register/>} />
+               <Route path="/login" element={<Login/>} />
+                <Route path="/forgot-password" element={<ForgotPassword/>} />
+                
 
               <Route element={<PrivateRoute />}>
                 <Route path="/admin" element={<ViewWithAdminLayout />}>

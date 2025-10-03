@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import HeadingImage from "molecules/heading-image";
-import partnerWithUs from "../../assets/partnersSupporters/partner-with-us.jpg";
 import { Link } from "react-router-dom";
 import Button from "atoms/button";
 import axios from "axios";
@@ -19,7 +18,7 @@ export default function Partners() {
     const fetchDetails = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/common-layout");
-        const apiData:  ApiResponse = response.data.data;
+        const apiData:  ApiResponse = response.data.data[0];
         console.log("Fetched API Data:", apiData);
         setData(apiData);
       } catch (error) {

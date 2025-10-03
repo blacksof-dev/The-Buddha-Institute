@@ -12,7 +12,7 @@ const Footer = () => {
 
   useEffect(() => {
     const hideNavOnPaths = [
-      "/forgot-password",
+      "/forgot-admin-password",
       "/admin",
       "/new-password",
       "/signin",

@@ -4,6 +4,7 @@ import HeaderLink from "./link-header";
 import MobileNav from "./mobile-nav";
 import PopUp from "molecules/PopUp";
 import ApplicationProcess from "molecules/applicationPopup";
+import dummyImg from '../assets/dummy-profile.png'
 
 const Navnew = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -14,6 +15,8 @@ const Navnew = () => {
   const [showPopup, setshowPopup] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const [profile, setProfile] = useState<boolean>(false);
+
 
   const location = useLocation();
 
@@ -79,12 +82,12 @@ const Navnew = () => {
 
   useEffect(() => {
     const hideNavOnPaths = [
-      "/forgot-password",
+      "/forgot-admin-password",
       "/admin",
       "/new-password",
       "/signin",
-      
-     
+
+
     ];
     const currentPath = window.location.pathname;
     if (
@@ -98,12 +101,11 @@ const Navnew = () => {
   }, []);
 
   return (
-    <nav ref={navRef} className="sticky top-0 z-[999] bg-darkGreen text-white ">
+    <nav ref={navRef} className="fixed top-0 left-0 w-full z-[999] bg-darkGreen text-white">
       {/* Desktop Navbar */}
       <div
-        className={`${
-          isScrolling ? "-translate-y-[10rem]" : ""
-        }  transition-all  duration-700 absolute inset-0 hidden xl:block `}
+        className={`${isScrolling ? "-translate-y-[10rem]" : ""
+          } transition-all duration-700 hidden xl:block`}
       >
         <div className=" flex justify-end gap-8 bg-darkCyan text-sm">
           <button
@@ -112,19 +114,71 @@ const Navnew = () => {
           >
             Subscribe to our newsletter
           </button>
-          <h6 className="flex gap-x-12 py-3 font-lato-regular 2xl:text-[16px]">
+          <h6 className="flex  justify-center items-center gap-x-12 py-3 font-lato-regular 2xl:text-[16px]">
             <HeaderLink
               text=" Contact Us "
               to="/contact-us"
-              className="custom-class"
+              className="font-lato-regular 2xl:text-[18px]"
               iconClassName="custom-icon-class"
             />
-            <button
+
+             <button
               onClick={() => setshowPopup(true)}
               className="my-auto font-lato-regular 2xl:text-[18px] text-white"
             >
               Become a Buddha Fellow
             </button>
+
+            <HeaderLink
+              text="Login"
+              to="/login"
+              className="font-lato-regular 2xl:text-[18px]"
+              iconClassName="custom-icon-class"
+            />
+
+            <HeaderLink
+              text="Register"
+              to="/registration"
+              className="font-lato-regular 2xl:text-[18px]"
+              iconClassName="custom-icon-class"
+            /> 
+
+            <div className="relative ">
+                {/* Profile Button */}
+                <button
+                  onClick={() => setProfile(!profile)}
+                  className="w-8 h-8 rounded-full cursor-pointer relative"
+                >
+                  <img
+                    src={dummyImg}
+                    className="rounded-full"
+                    alt="Profile Image"
+                  />
+                </button>
+
+               {profile && (
+                    <div className="absolute  mt-2 left-1 right-0 w-28 md:w-35 bg-white py-5 shadow-lg rounded-lg p-2 z-50 border border-lightPurple">
+                      
+                        <button
+                          onClick={() => setProfile(false)}
+                          className="cursor-pointer text-black font-lato-regular  "
+                        >
+                          My Profile
+                        </button>
+                    
+
+                      
+                        <button
+                          className=" text-left w-full cursor-pointer text-black font-lato-regular "
+                        >
+                          Logout
+                        </button>
+                      
+                    </div>
+                  )}
+              </div>
+
+           
             {showPopup && (
               <ApplicationProcess onclose={() => setshowPopup(false)} />
             )}
@@ -136,13 +190,12 @@ const Navnew = () => {
           </h4>
         </div>
         <div
-          className={`absolute inset-x-0 ${
-            ["/contact-us", "/donate-usa", "/donate-india", "/awards"].includes(
-              location.pathname
-            ) || isScrolled
+          className={`absolute inset-x-0 ${["/contact-us", "/donate-usa", "/donate-india", "/awards"].includes(
+            location.pathname
+          ) || isScrolled
               ? "bg-darkGreen"
               : "bg-customGray backdrop-blur-[18.4px]"
-          } transition-all duration-300`}
+            } transition-all duration-300`}
         >
           <div className="w-container-xl flex items-center  py-3 ">
             <div className=" flex items-center">
@@ -258,9 +311,8 @@ const Navnew = () => {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-full bg-darkCyan  transform ${
-          isDrawerOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
+        className={`fixed top-0 right-0 h-full w-full bg-darkCyan  transform ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-300 ease-in-out`}
       >
         <div className="flex   justify-end p-4">
           <div className="flex w-full  justify-between">
@@ -324,11 +376,26 @@ const Navnew = () => {
             to="/contact-us"
             onClick={toggleDrawer}
           />
+
+          <MobileNav
+            text="Login"
+            to="/login"
+            onClick={toggleDrawer}
+          />
+
+          <MobileNav
+            text="Register"
+            to="/registration"
+            onClick={toggleDrawer}
+          />
           <MobileNav
             text="Became a Buddha Fellow"
             to="/https://application.thebuddhainstitute.org/signin"
             onClick={toggleDrawer}
           />
+
+
+
 
           <a href="/donate-us">
             <button className="fixed inset-x-4 bottom-6 mx-auto bg-pear px-2 py-2 text-black font-lato-bold">

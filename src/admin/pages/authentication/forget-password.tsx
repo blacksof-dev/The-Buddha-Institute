@@ -51,7 +51,7 @@ const ForgetPassword = () => {
     const handleSubmitEmail = async (formDta: forgotPasswordProps) => {
         try {
             setIsLoading(true)
-            await axios.post(`${process.env.REACT_APP_LOCAL_URL}/api/admin/forgot-password`, formData);
+            await axios.post(`${process.env.REACT_APP_LOCAL_URL}/api/admin/forgot-admin-password`, formData);
             // console.log(res)
             toast.success("Password reset email sent successfully!", {
                 position: "top-right",
