@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
+import Loading from "./loading";
 
 
 const UserLoginSchema = z.object({
@@ -16,15 +18,27 @@ const ForgotPassword = () => {
     {
       register,
       handleSubmit,
+      reset,
       formState: { errors },
 
     } = useForm<UserFormData>({ resolver: zodResolver(UserLoginSchema) })
 
+     const [loading, setLoading] = useState(false);
+     
   const onSubmit = async (data: UserFormData) => {
     try {
-      const formToSend = new FormData();
-      formToSend.append("email", data.email)
-      await axios.post(`http://localhost:3000/api/signup`, formToSend, { headers: { "Content-Type": "multipart/form-data" } })
+       
+        setLoading(true);
+        const response = await axios.post(`${process.env.REACT_APP_APPLICATION_URL}/api/forgot_password`, { email: data.email }, { headers: { "Content-Type": "application/json" } });
+        console.log("Forgot Password Response:", response);
+        if (response.data.status) {
+          toast.success("Request successful! Please check your email.");
+          reset()
+          setLoading(false);
+        }
+        else {
+          toast.error("Something went wrong!");
+        }
     }
     catch (error: any) {
       console.error("API Error:", error.response?.data || error.message);
@@ -72,7 +86,7 @@ const ForgotPassword = () => {
               type="submit"
               className="bg-pear text-black font-bold px-8 py-2 rounded-lg  transition"
             >
-              Submit
+              {loading ? <Loading /> : "Submit"}
             </button>
           </div>
 

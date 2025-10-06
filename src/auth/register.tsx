@@ -3,6 +3,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { toast } from "react-toastify";
+import Loading from "./loading";
 
 const UserSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 characters").max(50, "Name can't be longer than 50 characters"),
@@ -32,82 +34,94 @@ const Register = () => {
             handleSubmit,
             formState: { errors },
             watch,
+            reset,
 
         } = useForm<UserFormData>({ resolver: zodResolver(UserSchema) })
 
     const [otpSent, setOtpSent] = useState(false);
     const [isOtpVerified, setIsOtpVerified] = useState(false);
+    const [loading, setLoading] = useState(false);
     const mobileNumber = watch("mobile");
     const otpValue = watch("otp");
 
     const onSubmit = async (data: UserFormData) => {
         if (!isOtpVerified) {
-            alert("Please verify your OTP before form submitting");
+            toast.error("Please verify your OTP before form submitting");
             return;
         }
         try {
 
-
-
-            const formToSend = new FormData();
-            formToSend.append("name", data.name);
-            formToSend.append("email", data.email);
-            formToSend.append("password", data.password);
-            formToSend.append("mobile", data.mobile);
-            formToSend.append("gender", data.gender);
-
+            setLoading(true);
             const response = await axios.post(
-                "https://application.thebuddhainstitute.org/api/signup",
-                formToSend,
-                { headers: { "Content-Type": "multipart/form-data" } }
+                `${process.env.REACT_APP_APPLICATION_URL}/api/signup`,
+                {
+                    name: data.name,
+                    email: data.email,
+                    password: data.password,
+                    mobile: data.mobile,
+                    gender: data.gender
+                },
+                { headers: { "Content-Type": "application/json" } }
             );
 
 
+
             if (response.data.status) {
-                alert(response.data.message || "Registration successful!");
+                toast.success(response.data.message || "Registration successful!");
+                reset()
+                setLoading(false);
 
             } else {
-                alert(response.data.message || "Something went wrong!");
+                toast.error(response.data.message || "Something went wrong!");
             }
         } catch (error: any) {
             console.error("API Error:", error.response?.data || error.message);
-            alert(error.response?.data?.message || "Failed to register. Try again.");
+            toast.error(error.response?.data?.message || "Failed to register. Try again.");
         }
     };
 
     const handleOtp = async () => {
         try {
             if (!mobileNumber && mobileNumber.length !== 10) {
-                alert("Please enter the valid 10 digit phone Number");
+                toast.error("Please enter the valid 10 digit phone Number");
                 return;
             }
-            const response = await axios.post("https://application.thebuddhainstitute.org/api/send_otp", { mobile: mobileNumber }, { headers: { "Content-Type": "application/json" } })
+            console.log("MobileNumber:", mobileNumber);
+            const response = await axios.post(
+                `${process.env.REACT_APP_APPLICATION_URL}/api/send_otp`,
+                { mobile: mobileNumber },
+                {
+                    headers: { "Content-Type": "application/json" }
+                }
+            )
+
+            console.log("OTP Response:", response);
 
             if (response.data.status) {
                 setOtpSent(true)
-                alert("OTP sent successfully!");
+                toast.success("OTP sent successfully!");
             }
             else {
-                alert("Some error during sending otp")
+                toast.error("Some error during sending otp")
             }
         }
         catch (error: any) {
-           console.log(error.message)
+            console.log(error.message)
         }
 
     }
 
     const verifyOtp = async () => {
         try {
-            const response = await axios.post("https://application.thebuddhainstitute.org/api/verify_otp", { mobile: mobileNumber, otp: otpValue }, { headers: { "Content-Type": "application/json" } });
+            const response = await axios.post(`${process.env.REACT_APP_APPLICATION_URL}/api/verify_otp`, { mobile: mobileNumber, otp: otpValue }, { headers: { "Content-Type": "application/json" } });
 
             if (response.data.status) {
                 setIsOtpVerified(true)
-                alert("OTP verified successfully!");
+                toast.success("OTP verified successfully!");
             }
             else {
                 setIsOtpVerified(false)
-                alert("Some error during verifying otp")
+                toast.error("Some error during verifying otp")
             }
         }
         catch (error: any) {
@@ -227,7 +241,7 @@ const Register = () => {
                                 <button
                                     type="button"
                                     onClick={verifyOtp}
-                                    className={`px-4 py-2 rounded-lg ${isOtpVerified ? "bg-green-600 text-white" : "bg-yellow-400"
+                                    className={`px-4 py-2 rounded-lg ${isOtpVerified ? "bg-green-600 text-white" : "bg-pear text-black"
                                         }`}
                                 >
                                     {isOtpVerified ? "Verified" : "Verify OTP"}
@@ -257,7 +271,11 @@ const Register = () => {
                             type="submit"
                             className="bg-pear text-black font-lato-bold px-8 py-2 rounded-lg  transition"
                         >
-                            Sign Up
+                            {loading ? (
+                                <Loading />
+                            ) : (
+                                "Sign Up"
+                            )}
                         </button>
                     </div>
                 </form>
