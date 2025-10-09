@@ -1,6 +1,7 @@
 import axios from "axios";
 import Banner from "molecules/banner";
 import React, { useEffect, useState } from "react";
+import bannerImage from '../../assets/partnersSupporters/partners-banner.png'
 interface ApiData {
   _id: string;
   bannerImage: string;
@@ -29,9 +30,12 @@ export default function Transformation() {
   return (
     <>
       <Banner
-        bannerImage={data?.bannerImage}
-        mainHeading={data?.heading}
-        subHeading={data?.description}
+        // bannerImage={data?.bannerImage}
+        // mainHeading={data?.heading}
+        // subHeading={data?.description}
+         bannerImage={bannerImage}
+        mainHeading="‘Together’ is how transformation begins"
+        subHeading="Every journey is enriched by the company we keep. Our goals gain strength from the unwavering faith and support of our valued partners, supporters, and allies."
         customClass="2xl:max-w-[52%] lg:max-w-[90%] xl:max-w-[70%]"
         buttonText="Become a Donor"
         buttonLink="/donate-us"

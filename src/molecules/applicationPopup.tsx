@@ -2,18 +2,36 @@
 import CommonCard from "molecules/commonCardSlider";
 import Button from "atoms/button";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { RxCross2 } from "react-icons/rx";
 import { Icon } from "organisms/iconCommonent";
+import { getToken } from "../auth/authenticationFunction";
+
 
 const ApplicationProcess = ({ onclose }: { onclose: () => void }) => {
+
+  const navigate = useNavigate();
+
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
   }, []);
+
+  const handleEnrollNow = () => {
+    const token = getToken()
+    console.log("Token:", token);
+    if (token) {
+      window.location.href = "https://application.thebuddhainstitute.org/demo_file_step1/";
+    }
+    else {
+      navigate("/login")
+      onclose();
+    }
+  }
 
   return (
     <>
@@ -24,8 +42,8 @@ const ApplicationProcess = ({ onclose }: { onclose: () => void }) => {
               onClick={onclose}
               className="scale-90 sm:scale-100 absolute top-4 right-4 h-10 w-10 bg-pink border border-darkBrown text-black rounded-full flex justify-center items-center text-xl cursor-pointer z-50"
             >
-              <Icon icon={RxCross2 }  />
-              
+              <Icon icon={RxCross2} />
+
             </button>
             <div className="relative w-full ">
               <section
@@ -60,9 +78,13 @@ const ApplicationProcess = ({ onclose }: { onclose: () => void }) => {
                       </div>
                       <div className=" justify-center sm:justify-start flex mt-4">
                         <div className=" w-fit ">
-                          <Link to="https://application.thebuddhainstitute.org/signin">
-                            <Button text={"Enroll now"} />
-                          </Link>
+                          <button
+                            type="button"
+                            onClick={handleEnrollNow}
+                            className="bg-pear text-black font-lato-bold px-8 py-4 rounded-lg  cursor-pointer transition"
+                          >
+                            Enroll now
+                          </button>
                         </div>
                       </div>
                     </div>

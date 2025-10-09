@@ -30,9 +30,9 @@ const ImpactBanner = () => {
   return (
     <div>
       <Banner
-        bannerImage={data?.bannerImage}
-        mainHeading={data?.heading}
-        subHeading={data?.description}
+        bannerImage={bannerImage}
+        mainHeading="From aspirations to achievements"
+        subHeading="Tracing the journey of change"
         buttonText="Join the family"
         buttonLink="/contact-us"
         overlayVideo="bg-gradient-to-t from-teal to-transparent absolute inset-x-0 h-[50%] bottom-0 sm:block hidden"

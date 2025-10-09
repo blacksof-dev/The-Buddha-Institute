@@ -3,6 +3,7 @@ import HeadingImage from "molecules/heading-image";
 import { Link } from "react-router-dom";
 import Button from "atoms/button";
 import axios from "axios";
+import image from '../../assets/partnersSupporters/partner-with-us.jpg'
 
 interface ApiResponse {
   image:string;
@@ -33,9 +34,9 @@ export default function Partners() {
       <section className=" bg-[#FAF9F5]">
         <div className="w-container-xl ">
           <HeadingImage
-            heading={data?.heading ?? ""}
+            heading="Partner with us"
             highlight=""
-            imageSrc={data?.image ?? ""}
+            imageSrc={image}
             imageAlt="working ladies"
             hrColor="gray-400"
           />
@@ -43,10 +44,10 @@ export default function Partners() {
           <div className="blade-bottom-padding-lg md:flex  justify-between ">
             <div className="blade-top-padding-sm">
               <h2 className="text-green font-lato-bold 2xl:text-4xl">
-                {data?.subheading}
+              Want to become a part of the transformation?
               </h2>
               <h3 className="mt-3 font-lato-regular sm:mt-6 sm:max-w-[70%] blade-bottom-padding-sm">
-               {data?.description}
+             Come onboard and give wings to India’s socio-economic progress where it matters, for the ones who matter.
               </h3>
             </div>
             

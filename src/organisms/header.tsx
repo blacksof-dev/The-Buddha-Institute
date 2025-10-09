@@ -1,31 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import HeaderLink from "./link-header";
 import MobileNav from "./mobile-nav";
 import PopUp from "molecules/PopUp";
 import ApplicationProcess from "molecules/applicationPopup";
 import dummyImg from '../assets/dummy-profile.png'
+import { getToken } from "auth/authenticationFunction";
+import { toast } from "react-toastify";
+import {  useNavigate } from "react-router-dom";
+import Profile from "auth/profile";
 
 const Navnew = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const navRef = useRef<any>(null);
-  const scrollRef = useRef<any>(null);
   const [showPopup, setshowPopup] = useState(false);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<boolean>(false);
 
 
   const location = useLocation();
+  const token = getToken()
 
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
-  };
-
-  const dropdownRef = useRef<any>();
-  const solutionsRef = useRef<any>();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+   const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -100,6 +99,38 @@ const Navnew = () => {
     }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("tbi_token");
+    toast.success("Logout successful!");
+    navigate("/")
+  }
+  const handleProfile = () => {
+    setProfile(false);
+  }
+
+
+
+useEffect(() => {
+  setProfile(false); 
+}, [token]);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setProfile(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav ref={navRef} className="fixed top-0 left-0 w-full z-[999] bg-darkGreen text-white">
       {/* Desktop Navbar */}
@@ -122,63 +153,68 @@ const Navnew = () => {
               iconClassName="custom-icon-class"
             />
 
-             <button
+            <button
               onClick={() => setshowPopup(true)}
               className="my-auto font-lato-regular 2xl:text-[18px] text-white"
             >
               Become a Buddha Fellow
             </button>
 
-            <HeaderLink
-              text="Login"
-              to="/login"
-              className="font-lato-regular 2xl:text-[18px]"
-              iconClassName="custom-icon-class"
-            />
 
-            <HeaderLink
-              text="Register"
-              to="/registration"
-              className="font-lato-regular 2xl:text-[18px]"
-              iconClassName="custom-icon-class"
-            /> 
 
-            <div className="relative ">
-                {/* Profile Button */}
-                <button
-                  onClick={() => setProfile(!profile)}
-                  className="w-8 h-8 rounded-full cursor-pointer relative"
-                >
-                  <img
-                    src={dummyImg}
-                    className="rounded-full"
-                    alt="Profile Image"
-                  />
-                </button>
+            <div className="relative">
+              {/* Show Profile Icon if Logged In */}
+              {token ? (
+                <>
+                  <button
+                    onClick={() => setProfile((prev) => !prev)}
+                    className="w-8 h-8 rounded-full cursor-pointer relative"
+                  >
+                    <img
+                      src={dummyImg}
+                      className="rounded-full border border-white"
+                      alt="Profile"
+                    />
+                  </button>
 
-               {profile && (
-                    <div className="absolute  mt-2 left-1 right-0 w-28 md:w-35 bg-white py-5 shadow-lg rounded-lg p-2 z-50 border border-lightPurple">
-                      
-                        <button
-                          onClick={() => setProfile(false)}
-                          className="cursor-pointer text-black font-lato-regular  "
-                        >
-                          My Profile
-                        </button>
-                    
-
-                      
-                        <button
-                          className=" text-left w-full cursor-pointer text-black font-lato-regular "
-                        >
-                          Logout
-                        </button>
-                      
+                  {/* Dropdown Menu */}
+                  {profile && (
+                    <div className="absolute mt-2 left-1 right-0 w-32 bg-white py-3 shadow-lg rounded-lg p-2 z-50 border border-lightPurple" ref={dropdownRef}>
+                      <button
+                        onClick={handleProfile}
+                        className="cursor-pointer text-black font-lato-regular block w-full text-left"
+                      >
+                       <Profile/>
+                      </button>
+                      <button
+                        onClick={handleLogout}
+                        className="cursor-pointer text-black font-lato-regular block w-full text-left"
+                      >
+                        Logout
+                      </button>
                     </div>
                   )}
-              </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex flex-row gap-8">
+                    <HeaderLink
+                      text="Login"
+                      to="/login"
+                      className="font-lato-regular 2xl:text-[18px]"
+                    />
+                    <HeaderLink
+                      text="Register"
+                      to="/registration"
+                      className="font-lato-regular 2xl:text-[18px]"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
 
-           
+
+
             {showPopup && (
               <ApplicationProcess onclose={() => setshowPopup(false)} />
             )}
@@ -193,8 +229,8 @@ const Navnew = () => {
           className={`absolute inset-x-0 ${["/contact-us", "/donate-usa", "/donate-india", "/awards"].includes(
             location.pathname
           ) || isScrolled
-              ? "bg-darkGreen"
-              : "bg-customGray backdrop-blur-[18.4px]"
+            ? "bg-darkGreen"
+            : "bg-customGray backdrop-blur-[18.4px]"
             } transition-all duration-300`}
         >
           <div className="w-container-xl flex items-center  py-3 ">
@@ -211,59 +247,45 @@ const Navnew = () => {
               <HeaderLink
                 text="About Us"
                 to="/about-us"
-                // isDropdownOpen={isDropdownOpen}
-                // toggleDropdown={toggleDropdown}
                 className="custom-class"
                 iconClassName="custom-icon-class"
               />
               <HeaderLink
                 text="Buddha Fellowship Program"
                 to="/budha-fellowship-program"
-                // isDropdownOpen={isDropdownOpen}
-                // toggleDropdown={toggleDropdown}
                 className="custom-class"
                 iconClassName="custom-icon-class"
               />
               <HeaderLink
                 text="Buddha Fellows"
                 to="/buddha-fellows"
-                // isDropdownOpen={isDropdownOpen}
-                // toggleDropdown={toggleDropdown}
                 className="custom-class"
                 iconClassName="custom-icon-class"
               />
               <HeaderLink
                 text=" Impact"
                 to="/impact"
-                // isDropdownOpen={isDropdownOpen}
-                // toggleDropdown={toggleDropdown}
                 className="custom-class"
                 iconClassName="custom-icon-class"
               />
               <HeaderLink
                 text="Partners & Supporters"
                 to="/partners-and-supporters"
-                // isDropdownOpen={isDropdownOpen}
-                // toggleDropdown={toggleDropdown}
                 className="custom-class"
                 iconClassName="custom-icon-class"
               />
               <HeaderLink
                 text="Awards"
                 to="/awards"
-                // isDropdownOpen={isDropdownOpen}
-                // toggleDropdown={toggleDropdown}
                 className="custom-class"
                 iconClassName="custom-icon-class"
               />
 
               <li className="cursor-pointer hover:text-pear font-lato-regular transition-all duration-500 xl:text-[14px] 2xl:text-[16px]">
-                {/* <Link to="/resources">Resources</Link> */}
+
                 <HeaderLink
                   text="Resources"
                   to="/resources"
-                  // isDropdownOpen={isDropdownOpen}
-                  // toggleDropdown={toggleDropdown}
                   className="custom-class"
                   iconClassName="custom-icon-class"
                 />
@@ -275,24 +297,71 @@ const Navnew = () => {
       </div>
 
       {/* Mobile Navbar */}
-      <div className="flex items-center justify-between px-4   xl:hidden">
+      <div className="flex items-center justify-between  px-4   xl:hidden">
         <Link to="/" target="" rel="noopener noreferrer">
           <img src="/final-logo.svg" alt="Buddha Institute" className="w-24" />
         </Link>
 
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-4 sm:gap-4">
           <button
             onClick={() => handlePopUp()}
-            className="my-auto font-lato-regular 2xl:text-[18px] text-white"
+            className="my-auto font-lato-regular text-sm text-white"
           >
             Subscribe to our newsletter
           </button>
+          <div className="relative">
+            {/* Show Profile Icon if Logged In */}
+            {token ? (
+              <>
+                <button
+                  onClick={() => setProfile((prev) => !prev)}
+                  className="w-8 h-8 rounded-full cursor-pointer relative"
+                >
+                  <img
+                    src={dummyImg}
+                    className="rounded-full border border-white"
+                    alt="Profile"
+                  />
+                </button>
+
+                {/* Dropdown Menu */}
+                {profile && (
+                  <div className="absolute mt-2 left-1 right-0 w-20 p-1 py-1 bg-white  shadow-lg rounded-lg  z-50 border border-lightPurple">
+                    <button
+                      onClick={() => setProfile(false)}
+                      className="cursor-pointer text-black font-lato-regular block w-full text-sm text-left"
+                    >
+                      My Profile
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="cursor-pointer text-black font-lato-regular block text-sm w-full text-left"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="flex flex-row gap-8 ">
+                  <HeaderLink
+                    text="Login"
+                    to="/login"
+                    className="font-lato-regular text-sm my-auto mt-1"
+                  />
+                </div>
+              </>
+            )}
+          </div>
           <button
             onClick={toggleDrawer}
             className="text-white focus:outline-none"
           >
+
+
             <svg
-              className=" h-8 w-8 "
+              className=" h-6 w-6 sm:h-8 sm:w-8 "
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -377,22 +446,14 @@ const Navnew = () => {
             onClick={toggleDrawer}
           />
 
-          <MobileNav
-            text="Login"
-            to="/login"
-            onClick={toggleDrawer}
-          />
+          {token ? (
+            <MobileNav
+              text="Became a Buddha Fellow"
+              to="https://application.thebuddhainstitute.org/demo_file_step1/"
+              onClick={toggleDrawer}
+            />
+          ) : null}
 
-          <MobileNav
-            text="Register"
-            to="/registration"
-            onClick={toggleDrawer}
-          />
-          <MobileNav
-            text="Became a Buddha Fellow"
-            to="/https://application.thebuddhainstitute.org/signin"
-            onClick={toggleDrawer}
-          />
 
 
 

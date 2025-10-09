@@ -1,10 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { z } from "zod";
-
+import { saveToken } from "./authenticationFunction";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import Loading from "./loading";
 
 const UserLoginSchema = z.object({
   email: z.string().max(255, "Email is too long").email("Invalid email address"),
@@ -21,19 +23,43 @@ const Login = () => {
     {
       register,
       handleSubmit,
+      reset,
       formState: { errors },
 
-    } = useForm<UserFormData>({ resolver: zodResolver(UserLoginSchema) })
+    } = useForm<UserFormData>({ resolver: zodResolver(UserLoginSchema) });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (data: UserFormData) => {
     try {
-      const formToSend = new FormData();
-      formToSend.append("email", data.email)
-      formToSend.append("password", data.password)
-      await axios.post(`http://localhost:3000/api/signup`, formToSend, { headers: { "Content-Type": "multipart/form-data" } })
+
+      setLoading(true);
+      const response = await axios.post(
+        `${process.env.REACT_APP_APPLICATION_URL}/api/login`,
+        {
+
+          email: data.email,
+          password: data.password,
+
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      if (response.data.status) {
+        saveToken(response.data.token);
+        toast.success("Login successful!");
+        reset();
+        setLoading(false);
+        navigate("/");
+
+      } else {
+        toast.error("Something went wrong!");
+         setLoading(false);
+      }
     }
     catch (error: any) {
       console.error("API Error:", error.response?.data || error.message);
+  
     }
   }
 
@@ -90,7 +116,11 @@ const Login = () => {
               type="submit"
               className="bg-pear text-black font-bold px-8 py-2 rounded-lg  transition"
             >
-              Sign In
+              {loading ? (
+                <Loading />
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
 
@@ -116,3 +146,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
