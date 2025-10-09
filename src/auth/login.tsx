@@ -54,11 +54,12 @@ const Login = () => {
 
       } else {
         toast.error("Something went wrong!");
+         setLoading(false);
       }
     }
     catch (error: any) {
       console.error("API Error:", error.response?.data || error.message);
-
+  
     }
   }
 

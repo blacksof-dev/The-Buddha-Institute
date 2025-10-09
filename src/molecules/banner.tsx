@@ -42,7 +42,8 @@ const Banner = React.memo(({
       <div className=" flex flex-col items-center sm:relative sm:h-screen md:h-[90dvh] xl:h-screen overflow-hidden ">
         {bannerImage && (
           <img
-             src={`http://localhost:3000/${bannerImage.replace(/\\/g, '/')}`}
+            //  src={`http://localhost:3000/${bannerImage.replace(/\\/g, '/')}`}
+            src={bannerImage}
             alt={mainHeading}
             className="h-[300px] sm:h-full w-full object-cover "
             loading="eager"

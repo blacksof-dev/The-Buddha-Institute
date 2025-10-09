@@ -8,7 +8,6 @@ const ResourcesBanner = () => {
         mainHeading="Resources"
         subHeading="Knowledge, insights, news, and stories from the grassroots at your fingertips."
         buttonText=""
-   
         category="resources"
         customClass="pb-5"
       />

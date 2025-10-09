@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loading from "./loading";
+import { useNavigate } from "react-router-dom";
 
 const UserSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 characters").max(50, "Name can't be longer than 50 characters"),
@@ -43,7 +44,7 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
     const mobileNumber = watch("mobile");
     const otpValue = watch("otp");
-
+    const navigate = useNavigate();
     const onSubmit = async (data: UserFormData) => {
         if (!isOtpVerified) {
             toast.error("Please verify your OTP before form submitting");
@@ -67,12 +68,14 @@ const Register = () => {
 
 
             if (response.data.status) {
-                toast.success(response.data.message || "Registration successful!");
+                toast.success( "Registration successful!");
                 reset()
                 setLoading(false);
+                navigate("/login");
 
             } else {
-                toast.error(response.data.message || "Something went wrong!");
+                toast.error("Something went wrong!");
+                setLoading(false);
             }
         } catch (error: any) {
             console.error("API Error:", error.response?.data || error.message);

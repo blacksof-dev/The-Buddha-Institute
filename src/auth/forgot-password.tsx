@@ -38,6 +38,7 @@ const ForgotPassword = () => {
         }
         else {
           toast.error("Something went wrong!");
+          setLoading(false);
         }
     }
     catch (error: any) {

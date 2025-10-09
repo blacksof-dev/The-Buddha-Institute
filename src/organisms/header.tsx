@@ -110,6 +110,11 @@ const Navnew = () => {
 
 
 
+useEffect(() => {
+  setProfile(false); 
+}, [token]);
+
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
