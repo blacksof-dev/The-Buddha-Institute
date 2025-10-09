@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { saveToken } from "./authenticationFunction";
 import { toast } from "react-toastify";
@@ -9,60 +9,55 @@ import { useState } from "react";
 import Loading from "./loading";
 
 const UserLoginSchema = z.object({
-  email: z.string().max(255, "Email is too long").email("Invalid email address"),
+  email: z
+    .string()
+    .max(255, "Email is too long")
+    .email("Invalid email address"),
   password: z
     .string()
     .min(6, "Password must be at least 6 characters")
     .max(128, "Password is too long"),
-})
+});
 
-export type UserFormData = z.infer<typeof UserLoginSchema>
+export type UserFormData = z.infer<typeof UserLoginSchema>;
 
 const Login = () => {
-  const
-    {
-      register,
-      handleSubmit,
-      reset,
-      formState: { errors },
-
-    } = useForm<UserFormData>({ resolver: zodResolver(UserLoginSchema) });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<UserFormData>({ resolver: zodResolver(UserLoginSchema) });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async (data: UserFormData) => {
     try {
-
       setLoading(true);
       const response = await axios.post(
         `${process.env.REACT_APP_APPLICATION_URL}/api/login`,
         {
-
           email: data.email,
           password: data.password,
-
         },
         { headers: { "Content-Type": "application/json" } }
       );
 
       if (response.data.status) {
         saveToken(response.data.token);
-        toast.success("Login successful!");
+        localStorage.removeItem("userName");
+        toast.success(response.data.message || "Login successful!");
         reset();
         setLoading(false);
         navigate("/");
-
       } else {
-        toast.error("Something went wrong!");
-         setLoading(false);
+        toast.error(response.data.message || "Login failed!");
+        setLoading(false);
       }
-    }
-    catch (error: any) {
+    } catch (error: any) {
       console.error("API Error:", error.response?.data || error.message);
-  
     }
-  }
-
+  };
 
   return (
     <section className="mt-24 xl:mt-48 px-4 blade-bottom-margin-sm flex justify-center items-center ">
@@ -84,7 +79,9 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Email */}
           <div>
-            <label className="block font-lato-regular text-black mb-2">Enter Email</label>
+            <label className="block font-lato-regular text-black mb-2">
+              Enter Email
+            </label>
             <input
               type="email"
               placeholder="Email"
@@ -98,7 +95,9 @@ const Login = () => {
 
           {/* Password */}
           <div>
-            <label className="block font-lato-regular text-black mb-2">Enter Password</label>
+            <label className="block font-lato-regular text-black mb-2">
+              Enter Password
+            </label>
             <input
               type="password"
               placeholder="Password"
@@ -116,11 +115,7 @@ const Login = () => {
               type="submit"
               className="bg-pear text-black font-bold px-8 py-2 rounded-lg  transition"
             >
-              {loading ? (
-                <Loading />
-              ) : (
-                "Login"
-              )}
+              {loading ? <Loading /> : "Login"}
             </button>
           </div>
 
@@ -128,7 +123,10 @@ const Login = () => {
           <div className="text-center text-md mt-4 space-y-2">
             <p className="font-lato-regular text-black">
               Not registered?{" "}
-              <Link to="/registration" className="hover:text-teal font-bold hover:underline ">
+              <Link
+                to="/registration"
+                className="hover:text-teal font-bold hover:underline "
+              >
                 Register here
               </Link>
             </p>
@@ -146,5 +144,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

@@ -1,13 +1,13 @@
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import HeaderLink from "./link-header";
 import MobileNav from "./mobile-nav";
 import PopUp from "molecules/PopUp";
 import ApplicationProcess from "molecules/applicationPopup";
-import dummyImg from '../assets/dummy-profile.png'
+import dummyImg from "../assets/dummy-profile.png";
 import { getToken } from "auth/authenticationFunction";
 import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Profile from "auth/profile";
 
 const Navnew = () => {
@@ -19,12 +19,11 @@ const Navnew = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<boolean>(false);
 
-
   const location = useLocation();
-  const token = getToken()
+  const token = getToken();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -85,8 +84,6 @@ const Navnew = () => {
       "/admin",
       "/new-password",
       "/signin",
-
-
     ];
     const currentPath = window.location.pathname;
     if (
@@ -102,18 +99,15 @@ const Navnew = () => {
   const handleLogout = () => {
     localStorage.removeItem("tbi_token");
     toast.success("Logout successful!");
-    navigate("/")
-  }
+    navigate("/");
+  };
   const handleProfile = () => {
     setProfile(false);
-  }
+  };
 
-
-
-useEffect(() => {
-  setProfile(false); 
-}, [token]);
-
+  useEffect(() => {
+    setProfile(false);
+  }, [token]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -132,11 +126,15 @@ useEffect(() => {
   }, []);
 
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 w-full z-[999] bg-darkGreen text-white">
+    <nav
+      ref={navRef}
+      className="fixed top-0 left-0 w-full z-[999] bg-darkGreen text-white"
+    >
       {/* Desktop Navbar */}
       <div
-        className={`${isScrolling ? "-translate-y-[10rem]" : ""
-          } transition-all duration-700 hidden xl:block`}
+        className={`${
+          isScrolling ? "-translate-y-[10rem]" : ""
+        } transition-all duration-700 hidden xl:block`}
       >
         <div className=" flex justify-end gap-8 bg-darkCyan text-sm">
           <button
@@ -160,8 +158,6 @@ useEffect(() => {
               Become a Buddha Fellow
             </button>
 
-
-
             <div className="relative">
               {/* Show Profile Icon if Logged In */}
               {token ? (
@@ -179,13 +175,27 @@ useEffect(() => {
 
                   {/* Dropdown Menu */}
                   {profile && (
-                    <div className="absolute mt-2 left-1 right-0 w-32 bg-white py-3 shadow-lg rounded-lg p-2 z-50 border border-lightPurple" ref={dropdownRef}>
+                    <div
+                      className="absolute mt-2 left-1 right-0 w-36 bg-white py-3 shadow-lg rounded-lg p-2 z-50 border border-lightPurple"
+                      ref={dropdownRef}
+                    >
                       <button
                         onClick={handleProfile}
                         className="cursor-pointer text-black font-lato-regular block w-full text-left"
                       >
-                       <Profile/>
+                        <Profile />
                       </button>
+
+                      {/* ✅ FIX HERE */}
+                      <a
+                        href="https://application.thebuddhainstitute.org/demo_file_step1"
+                        className="cursor-pointer text-nowrap text-black font-lato-regular block w-full text-left"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View application
+                      </a>
+
                       <button
                         onClick={handleLogout}
                         className="cursor-pointer text-black font-lato-regular block w-full text-left"
@@ -196,24 +206,9 @@ useEffect(() => {
                   )}
                 </>
               ) : (
-                <>
-                  <div className="flex flex-row gap-8">
-                    <HeaderLink
-                      text="Login"
-                      to="/login"
-                      className="font-lato-regular 2xl:text-[18px]"
-                    />
-                    <HeaderLink
-                      text="Register"
-                      to="/registration"
-                      className="font-lato-regular 2xl:text-[18px]"
-                    />
-                  </div>
-                </>
+                <></>
               )}
             </div>
-
-
 
             {showPopup && (
               <ApplicationProcess onclose={() => setshowPopup(false)} />
@@ -226,12 +221,13 @@ useEffect(() => {
           </h4>
         </div>
         <div
-          className={`absolute inset-x-0 ${["/contact-us", "/donate-usa", "/donate-india", "/awards"].includes(
-            location.pathname
-          ) || isScrolled
-            ? "bg-darkGreen"
-            : "bg-customGray backdrop-blur-[18.4px]"
-            } transition-all duration-300`}
+          className={`absolute inset-x-0 ${
+            ["/contact-us", "/donate-usa", "/donate-india", "/awards"].includes(
+              location.pathname
+            ) || isScrolled
+              ? "bg-darkGreen"
+              : "bg-customGray backdrop-blur-[18.4px]"
+          } transition-all duration-300`}
         >
           <div className="w-container-xl flex items-center  py-3 ">
             <div className=" flex items-center">
@@ -282,7 +278,6 @@ useEffect(() => {
               />
 
               <li className="cursor-pointer hover:text-pear font-lato-regular transition-all duration-500 xl:text-[14px] 2xl:text-[16px]">
-
                 <HeaderLink
                   text="Resources"
                   to="/resources"
@@ -315,7 +310,7 @@ useEffect(() => {
               <>
                 <button
                   onClick={() => setProfile((prev) => !prev)}
-                  className="w-8 h-8 rounded-full cursor-pointer relative"
+                  className="w-6 h-6 rounded-full cursor-pointer relative"
                 >
                   <img
                     src={dummyImg}
@@ -326,16 +321,30 @@ useEffect(() => {
 
                 {/* Dropdown Menu */}
                 {profile && (
-                  <div className="absolute mt-2 left-1 right-0 w-20 p-1 py-1 bg-white  shadow-lg rounded-lg  z-50 border border-lightPurple">
+                  <div
+                    className="absolute mt-2 left-1 right-0 w-24 bg-white py-1 shadow-lg rounded-lg p-1 z-50 border border-lightPurple"
+                    ref={dropdownRef}
+                  >
                     <button
-                      onClick={() => setProfile(false)}
-                      className="cursor-pointer text-black font-lato-regular block w-full text-sm text-left"
+                      onClick={handleProfile}
+                      className="cursor-pointer text-black font-lato-regular block w-full text-left"
                     >
-                      My Profile
+                      <Profile />
                     </button>
+
+                    {/* ✅ FIX HERE */}
+                    <a
+                      href="https://application.thebuddhainstitute.org/demo_file_step1"
+                      className="cursor-pointer text-nowrap text-black font-lato-regular text-xs block w-full text-left"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View applic..
+                    </a>
+
                     <button
                       onClick={handleLogout}
-                      className="cursor-pointer text-black font-lato-regular block text-sm w-full text-left"
+                      className="cursor-pointer text-black text-xs font-lato-regular  block w-full text-left"
                     >
                       Logout
                     </button>
@@ -343,23 +352,13 @@ useEffect(() => {
                 )}
               </>
             ) : (
-              <>
-                <div className="flex flex-row gap-8 ">
-                  <HeaderLink
-                    text="Login"
-                    to="/login"
-                    className="font-lato-regular text-sm my-auto mt-1"
-                  />
-                </div>
-              </>
+              <></>
             )}
           </div>
           <button
             onClick={toggleDrawer}
             className="text-white focus:outline-none"
           >
-
-
             <svg
               className=" h-6 w-6 sm:h-8 sm:w-8 "
               xmlns="http://www.w3.org/2000/svg"
@@ -380,8 +379,9 @@ useEffect(() => {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-full bg-darkCyan  transform ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
-          } transition-transform duration-300 ease-in-out`}
+        className={`fixed top-0 right-0 h-full w-full bg-darkCyan  transform ${
+          isDrawerOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 ease-in-out`}
       >
         <div className="flex   justify-end p-4">
           <div className="flex w-full  justify-between">
@@ -453,10 +453,6 @@ useEffect(() => {
               onClick={toggleDrawer}
             />
           ) : null}
-
-
-
-
 
           <a href="/donate-us">
             <button className="fixed inset-x-4 bottom-6 mx-auto bg-pear px-2 py-2 text-black font-lato-bold">
