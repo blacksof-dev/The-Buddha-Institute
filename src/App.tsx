@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -8,7 +7,7 @@ import PartnersAndSupporters from "pages/partners-support";
 import BudhaFellowProgram from "pages/budha-fellow-program";
 import Footer from "organisms/footer";
 import Navnew from "organisms/header";
- import ScrollToTop from "layouts/ScrollToTop";
+import ScrollToTop from "layouts/ScrollToTop";
 import DonateUs from "pages/donate-us";
 import Home from "pages/home";
 import AboutUs from "pages/about-us";
@@ -62,8 +61,6 @@ const PrivateRoute = () => {
 function App() {
   return (
     <Router>
-    
-    
       <ScrollToTop />
       <div className="App">
         <Navnew />
@@ -77,8 +74,8 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-           theme="colored"
-        // transition={Bounce}
+          theme="colored"
+          // transition={Bounce}
         />
         <AuthProvider>
           <MarkDownProvider>
@@ -95,15 +92,20 @@ function App() {
               <Route path="/donate-us" element={<DonateUs />} />
               {/* <Route path="/ecowrap-caseStudy" element={<MarkDownPractise />} /> */}
               <Route path="signin" element={<AdminSignIn />}></Route>
-              <Route path="/forgot-admin-password" element={<ForgetPassword />} />
-              <Route path="create-password/:token" element={<CreatePassword />} />
+              <Route
+                path="/forgot-admin-password"
+                element={<ForgetPassword />}
+              />
+              <Route
+                path="create-password/:token"
+                element={<CreatePassword />}
+              />
               <Route
                 path="/budha-fellowship-program"
                 element={<BudhaFellowProgram />}
               />
 
               <Route path="/resources" element={<Resources />} />
-           
 
               <Route path="/awards" element={<Awards />} />
               <Route
@@ -118,10 +120,9 @@ function App() {
               <Route path="/donate-india" element={<DonationFromIndia />} />
               <Route path="/case-study" element={<MarkDown />} />
 
-               <Route path="/registration" element={<Register/>} />
-               <Route path="/login" element={<Login/>} />
-                <Route path="/forgot-password" element={<ForgotPassword/>} />
-                
+              <Route path="/registration" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
               <Route element={<PrivateRoute />}>
                 <Route path="/admin" element={<ViewWithAdminLayout />}>
@@ -147,7 +148,7 @@ function App() {
                   <Route path="awards" element={<AwardsAdminPanel />} />
                   <Route path="resources" element={<ResourcesAdmin />} />
                   <Route path="newsletter" element={<NewsLetterPage />} />
-                  <Route path="about-us" element={<AboutUsAdmin/>} />
+                  <Route path="about-us" element={<AboutUsAdmin />} />
                 </Route>
               </Route>
 
@@ -157,9 +158,7 @@ function App() {
         </AuthProvider>
         <Footer />
       </div>
- 
     </Router>
-
   );
 }
 

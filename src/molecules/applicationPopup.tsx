@@ -20,10 +20,10 @@ const ApplicationProcess = ({ onclose }: { onclose: () => void }) => {
 
   const handleEnrollNow = () => {
     const token = getToken();
-    console.log("Token:", token);
+   
     if (token) {
       window.open(
-        "https://application.thebuddhainstitute.org/demo_file_step1",
+        `https://application.thebuddhainstitute.org/login/verify_token?token=${token}`,
         "_blank"
       );
     } else {

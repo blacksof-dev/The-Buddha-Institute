@@ -48,7 +48,7 @@ const Login = () => {
         reset();
         setLoading(false);
         window.open(
-          "https://application.thebuddhainstitute.org/demo_file_step1",
+          `https://application.thebuddhainstitute.org/login/verify_token?token=${response.data.token}`,
           "_blank"
         );
       } else {

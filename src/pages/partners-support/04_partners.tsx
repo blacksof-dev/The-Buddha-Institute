@@ -1,26 +1,28 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeadingImage from "molecules/heading-image";
 import { Link } from "react-router-dom";
 import Button from "atoms/button";
 import axios from "axios";
-import image from '../../assets/partnersSupporters/partner-with-us.jpg'
+import image from "../../assets/partnersSupporters/partner-with-us.jpg";
 
-interface ApiResponse {
-  image:string;
-  heading:string;
-  subheading:string;
-  description:string;
+export interface ApiResponse {
+  image: string;
+  heading: string;
+  subheading: string;
+  description: string;
 }
 
 export default function Partners() {
-   const [data, setData] = useState< ApiResponse | null>(null);
+  const [data, setData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/common-layout");
-        const apiData:  ApiResponse = response.data.data[0];
-        console.log("Fetched API Data:", apiData);
+        const response = await axios.get(
+          "http://localhost:3000/api/common-layout"
+        );
+        const apiData: ApiResponse = response.data.data[0];
+       
         setData(apiData);
       } catch (error) {
         console.log(error);
@@ -34,9 +36,9 @@ export default function Partners() {
       <section className=" bg-[#FAF9F5]">
         <div className="w-container-xl ">
           <HeadingImage
-            heading="Partner with us"
+            heading={data?.heading ?? ""}
             highlight=""
-            imageSrc={image}
+            imageSrc={data?.image ?? ""}
             imageAlt="working ladies"
             hrColor="gray-400"
           />
@@ -44,18 +46,18 @@ export default function Partners() {
           <div className="blade-bottom-padding-lg md:flex  justify-between ">
             <div className="blade-top-padding-sm">
               <h2 className="text-green font-lato-bold 2xl:text-4xl">
-              Want to become a part of the transformation?
+                {data?.subheading}
               </h2>
               <h3 className="mt-3 font-lato-regular sm:mt-6 sm:max-w-[70%] blade-bottom-padding-sm">
-             Come onboard and give wings to India’s socio-economic progress where it matters, for the ones who matter.
+                {data?.description}
               </h3>
             </div>
-            
-              <div className=" h-10 w-[16rem] sm:blade-top-margin-sm md:h-14 md:w-[23rem] ">
-                  <Link to="/contact-us">
-                    <Button text={"Become a Donor"} />
-                  </Link>
-                </div>
+
+            <div className=" h-10 w-[16rem] sm:blade-top-margin-sm md:h-14 md:w-[23rem] ">
+              <Link to="/contact-us">
+                <Button text={"Become a Donor"} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

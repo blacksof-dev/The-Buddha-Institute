@@ -94,7 +94,7 @@ const VoiceSubComp = () => {
                       <h5 className="py-3 text-pear font-lato-bold">
                         {slide.title}
                       </h5>
-                      <h6
+                      <p
                         className={`font-lato-regular text-white h-full`}
                         dangerouslySetInnerHTML={{ __html: slide.desc || "" }}
                       />

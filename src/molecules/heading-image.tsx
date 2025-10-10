@@ -13,7 +13,6 @@ const HeadingImage: React.FC<HeadinngImageProps> = ({
   heading,
   highlight,
   imageSrc,
-  imageAlt,
   hrColor = "gray-400",
   breakLine = false,
 }) => {
@@ -28,11 +27,17 @@ const HeadingImage: React.FC<HeadinngImageProps> = ({
         <hr className={`border-${hrColor} mb-4`} />
         <div className="blade-top-margin-sm">
           <img
-            // src={`http://localhost:3000/${imageSrc.replace(/\\/g, '/')}`}
-            src={imageSrc}
-            alt={imageAlt}
-            className="h-full w-full object-cover"
-            
+            src={
+              imageSrc
+                ? `http://localhost:3000/${String(imageSrc).replace(
+                    /\\/g,
+                    "/"
+                  )}`
+                : ""
+            }
+            alt="Partners and Supporters"
+            className="h-[300px] sm:h-full w-full object-cover"
+           loading="lazy"
           />
         </div>
       </div>

@@ -19,53 +19,52 @@ type props = {
   buttonLinkTwo?: any;
   category?: string;
 };
-const Banner = React.memo(({
-  backgroundClass = "bg-teal",
-  bannerImage,
-  videoSrc,
-  overlayVideo,
-  mainHeading,
-  subHeading,
-  customClass,
-  buttonText,
-  buttonIcon,
-  buttonOnClick,
-  buttonLink,
-  buttonTextTwo,
-  buttonIconNew,
-  buttonOnClickNew,
-  buttonLinkTwo,
-  category,
-}: props) => {
-  return (
-    <section className={`${backgroundClass}  sm:pb-0`}>
-      <div className=" flex flex-col items-center sm:relative sm:h-screen md:h-[90dvh] xl:h-screen overflow-hidden ">
-        {bannerImage && (
-          <img
-            //  src={`http://localhost:3000/${bannerImage.replace(/\\/g, '/')}`}
-            src={bannerImage}
-            alt={mainHeading}
-            className="h-[300px] sm:h-full w-full object-cover "
-            loading="eager"
-            fetchPriority="high"
-          />
-        )}
-        {videoSrc && (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-              preload="metadata"   
-            className=" h-[300px] sm:h-full w-full object-cover"
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-        )}
+const Banner = React.memo(
+  ({
+    backgroundClass = "bg-teal",
+    bannerImage,
+    videoSrc,
+    overlayVideo,
+    mainHeading,
+    subHeading,
+    customClass,
+    buttonText,
+    buttonIcon,
+    buttonOnClick,
+    buttonLink,
+    buttonTextTwo,
+    buttonIconNew,
+    buttonOnClickNew,
+    buttonLinkTwo,
+    category,
+  }: props) => {
+    return (
+      <section className={`${backgroundClass}  sm:pb-0`}>
+        <div className=" flex flex-col items-center sm:relative sm:h-screen md:h-[90dvh] xl:h-screen overflow-hidden ">
+          {bannerImage && (
+            <img
+              src={`http://localhost:3000/${bannerImage.replace(/\\/g, "/")}`}
+              alt={mainHeading}
+              className="h-[300px] sm:h-full w-full object-cover "
+              loading="eager"
+              fetchPriority="high"
+            />
+          )}
+          {videoSrc && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className=" h-[300px] sm:h-full w-full object-cover"
+            >
+              <source src={videoSrc} type="video/mp4" />
+            </video>
+          )}
 
-        <div className={overlayVideo} />
+          <div className={overlayVideo} />
 
-        
           <div
             className={`${" blade-bottom-padding blade-top-padding sm:pb-0 sm:pt-0 sm:absolute sm:bottom-2 sm:flex sm:flex-col sm:items-center sm:justify-center sm:text-center sm:space-y-2 sm:px-4"} ${
               category === "resources" ? "mb-8" : "sm:blade-bottom-margin-sm"
@@ -178,10 +177,10 @@ const Banner = React.memo(({
               ) : null}
             </div>
           </div>
-     
-      </div>
-    </section>
-  );
-});
+        </div>
+      </section>
+    );
+  }
+);
 
 export default Banner;

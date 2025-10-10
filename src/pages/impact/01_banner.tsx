@@ -15,9 +15,9 @@ const ImpactBanner = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/banner-data/68dd26614dcf1467de30d65f");
+        const response = await axios.get("http://localhost:3000/api/banner-data/68e8e47e3bccc7a566e49423");
         const apiData: ApiData = response.data.data;
-        console.log("Fetched API Data:", apiData);
+      
         setData(apiData);
       } catch (error) {
         console.log(error);
@@ -30,9 +30,9 @@ const ImpactBanner = () => {
   return (
     <div>
       <Banner
-        bannerImage={bannerImage}
-        mainHeading="From aspirations to achievements"
-        subHeading="Tracing the journey of change"
+        bannerImage={data?.bannerImage}
+        mainHeading={data?.heading || ""}
+        subHeading={data?.description || ""}
         buttonText="Join the family"
         buttonLink="/contact-us"
         overlayVideo="bg-gradient-to-t from-teal to-transparent absolute inset-x-0 h-[50%] bottom-0 sm:block hidden"
