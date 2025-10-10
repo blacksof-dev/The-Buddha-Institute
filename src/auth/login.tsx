@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { saveToken } from "./authenticationFunction";
 import { toast } from "react-toastify";
@@ -29,8 +29,6 @@ const Login = () => {
     formState: { errors },
   } = useForm<UserFormData>({ resolver: zodResolver(UserLoginSchema) });
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
   const onSubmit = async (data: UserFormData) => {
     try {
       setLoading(true);
@@ -49,7 +47,10 @@ const Login = () => {
         toast.success(response.data.message || "Login successful!");
         reset();
         setLoading(false);
-        navigate("/");
+        window.open(
+          "https://application.thebuddhainstitute.org/demo_file_step1",
+          "_blank"
+        );
       } else {
         toast.error(response.data.message || "Login failed!");
         setLoading(false);
