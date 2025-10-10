@@ -125,6 +125,11 @@ const Register = () => {
   };
 
   const verifyOtp = async () => {
+    if (!otpValue || otpValue.length !== 6) {
+      toast.error("Please enter a valid 6-digit OTP");
+      return;
+    }
+
     try {
       setLoadingVerifyOtp(true);
       const response = await axios.post(
@@ -135,15 +140,16 @@ const Register = () => {
 
       if (response.data.status) {
         setIsOtpVerified(true);
-        setLoadingVerifyOtp(false);
         toast.success(response.data.message || "OTP verified successfully!");
       } else {
-        setLoadingVerifyOtp(false);
         setIsOtpVerified(false);
-        toast.error(response.data.message || "Some error during verifying otp");
+        toast.error(response.data.message || "OTP verification failed!");
       }
     } catch (error: any) {
       console.error("OTP Error:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "OTP verification failed");
+    } finally {
+      setLoadingVerifyOtp(false);
     }
   };
 
@@ -274,14 +280,20 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={verifyOtp}
-                  className={`px-4 py-2 rounded-lg ${
+                  disabled={loadingVerifyOtp}
+                  className={`px-4 py-2 rounded-lg flex items-center justify-center ${
                     isOtpVerified
                       ? "bg-green-600 text-white"
-                      : "bg-pear text-black"
+                      : "bg-pear text-black hover:bg-pear"
                   }`}
                 >
-                  {isOtpVerified ? "Verified" : "Verify OTP"}
-                  {loadingVerifyOtp ? <Loading /> : "Verified"}
+                  {loadingVerifyOtp ? (
+                    <Loading />
+                  ) : isOtpVerified ? (
+                    "Verified ✅"
+                  ) : (
+                    "Verify Now"
+                  )}
                 </button>
               </div>
             )}

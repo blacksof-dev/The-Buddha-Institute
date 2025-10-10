@@ -64,7 +64,7 @@ const Navnew = () => {
   if (loading) {
     return (
       <div>
-        <p>loading</p>
+        <p>loading...</p>
       </div>
     );
   }

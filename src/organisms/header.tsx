@@ -109,21 +109,21 @@ const Navnew = () => {
     setProfile(false);
   }, [token]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setProfile(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       dropdownRef.current &&
+  //       !dropdownRef.current.contains(event.target as Node)
+  //     ) {
+  //       setProfile(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <nav
@@ -158,13 +158,13 @@ const Navnew = () => {
               Become a Buddha Fellow
             </button>
 
-            <div className="relative">
+            <div className="  relative">
               {/* Show Profile Icon if Logged In */}
               {token ? (
                 <>
                   <button
                     onClick={() => setProfile((prev) => !prev)}
-                    className="w-8 h-8 rounded-full cursor-pointer relative"
+                    className="w-6 h-6 rounded-full cursor-pointer relative"
                   >
                     <img
                       src={dummyImg}
@@ -176,29 +176,36 @@ const Navnew = () => {
                   {/* Dropdown Menu */}
                   {profile && (
                     <div
-                      className="absolute mt-2 left-1 right-0 w-36 bg-white py-3 shadow-lg rounded-lg p-2 z-50 border border-lightPurple"
+                      className="absolute mt-2 left-1 right-0 w-36 bg-white py-1 shadow-lg rounded-lg p-1 z-50 border border-lightPurple"
                       ref={dropdownRef}
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <button
-                        onClick={handleProfile}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleProfile();
+                        }}
                         className="cursor-pointer text-black font-lato-regular block w-full text-left"
                       >
                         <Profile />
                       </button>
 
-                      {/* ✅ FIX HERE */}
                       <a
                         href="https://application.thebuddhainstitute.org/demo_file_step1"
-                        className="cursor-pointer text-nowrap text-black font-lato-regular block w-full text-left"
+                        className="cursor-pointer text-nowrap text-black font-lato-regular text-sm block w-full text-left"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         View application
                       </a>
 
                       <button
-                        onClick={handleLogout}
-                        className="cursor-pointer text-black font-lato-regular block w-full text-left"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleLogout();
+                        }}
+                        className="cursor-pointer text-black text-sm font-lato-regular block w-full text-left"
                       >
                         Logout
                       </button>
@@ -304,7 +311,7 @@ const Navnew = () => {
           >
             Subscribe to our newsletter
           </button>
-          <div className="relative">
+          <div className="xl:hidden block  relative">
             {/* Show Profile Icon if Logged In */}
             {token ? (
               <>
