@@ -191,7 +191,7 @@ const Navnew = () => {
                       </button>
 
                       <a
-                        href="https://application.thebuddhainstitute.org/demo_file_step1"
+                       href={`https://application.thebuddhainstitute.org/login/verify_token?token=${token}`}
                         className="cursor-pointer text-nowrap text-black font-lato-regular text-sm block w-full text-left"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -456,7 +456,7 @@ const Navnew = () => {
           {token ? (
             <MobileNav
               text="Became a Buddha Fellow"
-              to="https://application.thebuddhainstitute.org/demo_file_step1/"
+             to={`https://application.thebuddhainstitute.org/login/verify_token?token=${token}`}
               onClick={toggleDrawer}
             />
           ) : null}
