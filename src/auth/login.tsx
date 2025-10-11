@@ -43,6 +43,7 @@ const Login = () => {
 
       if (response.data.status) {
         saveToken(response.data.token);
+        console.log(response.data.token);
         localStorage.removeItem("userName");
         toast.success(response.data.message || "Login successful!");
         reset();
